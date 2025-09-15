@@ -1,0 +1,22 @@
+# Python virtual environment
+jellyenv/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Configuration file (may contain sensitive information)
+config.py
+# Instead, we'll include config.template.py
+
+# Log files
+*.log
+
+# Local development settings
+.env
+.venv
+
+# IDE settings
+.vscode/
+.idea/
