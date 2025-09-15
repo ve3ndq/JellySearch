@@ -24,4 +24,12 @@ if [ ! -f "config.py" ]; then
 fi
 
 # Start the application
-python3 JellySearchV3.py
+# Check if we're running in production mode
+if [ "$1" == "production" ]; then
+    # Run in production mode (no debug)
+    export FLASK_ENV=production
+    python3 JellySearchV3.py
+else
+    # Run in development mode (with debug)
+    python3 JellySearchV3.py
+fi
