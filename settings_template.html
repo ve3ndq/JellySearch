@@ -1,0 +1,56 @@
+{% extends "base_template" %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 30px auto; background: #202020; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+    <h2 style="text-align: center; margin-bottom: 25px; color: #00a4dc;">JellySearch Settings</h2>
+    
+    {% if success_message %}
+    <div style="background: #1e441e; color: #a3d9a3; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: center;">
+        {{ success_message }}
+    </div>
+    {% endif %}
+    
+    {% if error_message %}
+    <div style="background: #441e1e; color: #d9a3a3; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: center;">
+        {{ error_message }}
+    </div>
+    {% endif %}
+    
+    <form method="post" action="/settings">
+        <div style="margin-bottom: 20px;">
+            <label for="api_key" style="display: block; margin-bottom: 8px; font-weight: 500; color: #00a4dc;">API Key</label>
+            <input type="text" id="api_key" name="api_key" value="{{ config_values.API_KEY }}" style="width: 100%; background: #292929; color: #fff; border: 1.5px solid #292929; border-radius: 6px; padding: 10px 16px; font-size: 1.1em; outline: none; transition: border 0.2s; box-sizing: border-box;" required>
+            <small style="display: block; margin-top: 5px; color: #888;">Your Jellyfin API key for authentication</small>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <label for="server" style="display: block; margin-bottom: 8px; font-weight: 500; color: #00a4dc;">Server URL</label>
+            <input type="text" id="server" name="server" value="{{ config_values.SERVER }}" style="width: 100%; background: #292929; color: #fff; border: 1.5px solid #292929; border-radius: 6px; padding: 10px 16px; font-size: 1.1em; outline: none; transition: border 0.2s; box-sizing: border-box;" required>
+            <small style="display: block; margin-top: 5px; color: #888;">Your Jellyfin server URL (including port if needed)</small>
+        </div>
+        
+        <div style="margin-bottom: 30px;">
+            <label for="server_id" style="display: block; margin-bottom: 8px; font-weight: 500; color: #00a4dc;">Server ID</label>
+            <input type="text" id="server_id" name="server_id" value="{{ config_values.SERVER_ID }}" style="width: 100%; background: #292929; color: #fff; border: 1.5px solid #292929; border-radius: 6px; padding: 10px 16px; font-size: 1.1em; outline: none; transition: border 0.2s; box-sizing: border-box;" required>
+            <small style="display: block; margin-top: 5px; color: #888;">Your Jellyfin server ID for direct links</small>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between;">
+            <a href="/" style="background: #333; color: #fff; border: none; border-radius: 6px; padding: 10px 24px; font-size: 1.1em; font-weight: 500; cursor: pointer; text-decoration: none; text-align: center;">Cancel</a>
+            <button type="submit" style="background: #00a4dc; color: #fff; border: none; border-radius: 6px; padding: 10px 24px; font-size: 1.1em; font-weight: 500; cursor: pointer; transition: background 0.2s;">Save Changes</button>
+        </div>
+    </form>
+    
+    <div style="margin-top: 30px; border-top: 1px solid #333; padding-top: 20px;">
+        <h3 style="color: #00a4dc; margin-bottom: 15px;">Test Connection</h3>
+        <form method="post" action="/settings/test">
+            <button type="submit" style="background: #444; color: #fff; border: none; border-radius: 6px; padding: 10px 24px; font-size: 1.1em; font-weight: 500; cursor: pointer; transition: background 0.2s; width: 100%;">Test Jellyfin Connection</button>
+        </form>
+        {% if test_result %}
+        <div style="margin-top: 15px; padding: 15px; border-radius: 5px; text-align: center; {% if test_success %}background: #1e441e; color: #a3d9a3;{% else %}background: #441e1e; color: #d9a3a3;{% endif %}">
+            {{ test_result }}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
