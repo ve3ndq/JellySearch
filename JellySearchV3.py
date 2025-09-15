@@ -21,15 +21,15 @@ def read_config():
         importlib.reload(config)  # Reload to get latest changes
         config_values = {
             'API_KEY': getattr(config, 'API_KEY', 'YOUR_API_KEY_HERE'),
-            'SERVER': getattr(config, 'SERVER', 'http://jf.brr.savethecdn.com:80'),
-            'SERVER_ID': getattr(config, 'SERVER_ID', '0445248a59a744c0a8b7cb98fd215aed')
+            'SERVER': getattr(config, 'SERVER', 'YOUR_SERVER_URL_HERE'),
+            'SERVER_ID': getattr(config, 'SERVER_ID', 'YOUR_SERVER_ID_HERE')
         }
         return config_values
     except ImportError:
         return {
             'API_KEY': 'YOUR_API_KEY_HERE',
-            'SERVER': 'http://jf.brr.savethecdn.com:80',
-            'SERVER_ID': '0445248a59a744c0a8b7cb98fd215aed'
+            'SERVER': 'YOUR_SERVER_URL_HERE',
+            'SERVER_ID': 'YOUR_SERVER_ID_HERE'
         }
 
 # Function to update config.py file
@@ -50,8 +50,8 @@ def update_config(new_values):
             with open(config_path, 'w') as config_file:
                 config_file.write("# Jellyfin API configuration\n\n")
                 config_file.write("API_KEY = 'YOUR_API_KEY_HERE'\n")
-                config_file.write("SERVER = 'http://jf.brr.savethecdn.com:80'\n")
-                config_file.write("SERVER_ID = '0445248a59a744c0a8b7cb98fd215aed'\n")
+                config_file.write("SERVER = 'YOUR_SERVER_URL_HERE'\n")
+                config_file.write("SERVER_ID = 'YOUR_SERVER_ID_HERE'\n")
                 config_file.write("WEB_PLAYER_URL = f\"{SERVER}/web/#/details?id=\"\n")
                 config_file.write("FULL_PLAYER_URL = f\"{WEB_PLAYER_URL}{{item_id}}&serverId={SERVER_ID}\"\n")
     
